@@ -2,6 +2,7 @@ package somethingspecific.face2face.activities
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import somethingspecific.face2face.R
 
 class LoginActivity : AppCompatActivity() {
 

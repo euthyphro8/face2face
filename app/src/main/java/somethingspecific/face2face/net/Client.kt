@@ -1,4 +1,7 @@
 package somethingspecific.face2face.net
 
-class Client {
+public class Client {
+
+
+
 }
