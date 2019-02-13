@@ -13,13 +13,16 @@
             android:layout_marginTop="8dp"
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-            android:id="@+id/recyclerView">
+            android:id="@+id/client_list" android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/call_btn">
     </android.support.v7.widget.RecyclerView>
     <Button
-            android:text="Button"
+            android:text="@string/call_button_text"
             android:layout_width="0dp"
-            android:layout_height="wrap_content" android:id="@+id/button" android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/recyclerView" app:layout_constraintStart_toStartOf="parent"
+            android:layout_height="wrap_content" android:id="@+id/call_btn" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/client_list" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"/>
+            android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"
+            android:background="@color/colorAccent" android:textColor="@android:color/background_light"
+    />
 </android.support.constraint.ConstraintLayout>
