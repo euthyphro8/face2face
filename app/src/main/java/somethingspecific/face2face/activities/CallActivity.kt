@@ -22,40 +22,34 @@ class CallActivity : AppCompatActivity() {
         setContentView(R.layout.activity_call)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        //Initialize PeerConnectionFactory globals.
-        //Params are context, initAudio,initVideo and videoCodecHwAcceleration
         PeerConnectionFactory.initializeAndroidGlobals(this, true, true, true)
-
-        //Create a new PeerConnectionFactory instance.
         val options = PeerConnectionFactory.Options()
         val peerConnectionFactory = PeerConnectionFactory(options)
-
-
-        //Now create a VideoCapturer instance. Callback methods are there if you want to do something! Duh!
         val videoCapturerAndroid = createVideoCapturer()
-        //Create MediaConstraints - Will be useful for specifying video and audio constraints. More on this later!
         val constraints = MediaConstraints()
 
-        //Create a VideoSource instance
         val videoSource = peerConnectionFactory.createVideoSource(videoCapturerAndroid)
         val localVideoTrack = peerConnectionFactory.createVideoTrack("100", videoSource)
-
-        //create an AudioSource instance
         val audioSource = peerConnectionFactory.createAudioSource(constraints)
         val localAudioTrack = peerConnectionFactory.createAudioTrack("101", audioSource)
 
-        //we will start capturing the video from the camera
-        //params are width,height and fps
-        videoCapturerAndroid?.startCapture(1000, 1000, 30)
+        //Starts the camera
+        videoCapturerAndroid?.startCapture(1000, 1000, 24)
 
-        //create surface renderer, init it and add the renderer to the track
-        val videoView = findViewById<SurfaceViewRenderer>(R.id.localView)
-        videoView.setMirror(true)
+        val remoteVideoView = findViewById<SurfaceViewRenderer>(R.id.remoteView)
+        remoteVideoView.setMirror(true)
 
-        val rootEglBase = EglBase.create()
-        videoView.init(rootEglBase.eglBaseContext, null)
+        val remoteRootEglBase = EglBase.create()
+        remoteVideoView.init(remoteRootEglBase.eglBaseContext, null)
+        localVideoTrack.addRenderer(VideoRenderer(remoteVideoView))
 
-        localVideoTrack.addRenderer(VideoRenderer(videoView))
+
+        val localVideoView = findViewById<SurfaceViewRenderer>(R.id.localView)
+        remoteVideoView.setMirror(true)
+
+        val localRootEglBase = EglBase.create()
+        localVideoView.init(localRootEglBase.eglBaseContext, null)
+        localVideoTrack.addRenderer(VideoRenderer(localVideoView))
     }
 
     private fun createVideoCapturer(): VideoCapturer? {
@@ -84,6 +78,5 @@ class CallActivity : AppCompatActivity() {
         }
         return null
     }
-
 
 }
