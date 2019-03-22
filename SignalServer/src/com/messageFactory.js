@@ -53,3 +53,4 @@ exports.clientList = clientList;
 exports.sdpOffer = sdpOffer;
 exports.sdpReply = sdpReply;
 exports.ice = ice;
+exports.toString = msgToString();

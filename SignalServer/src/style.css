@@ -1,0 +1,24 @@
+
+.output {
+    margin: auto;
+}
+
+.trace {
+    color: rgb(8, 132, 189);
+}
+
+.info {
+    color: rgb(24, 136, 20);
+}
+
+.warn {
+    color: rgb(210, 223, 28);
+}
+
+.error {
+    color: rgb(238, 28, 28);
+}
+
+.critical {
+    color: rgb(68, 4, 43);
+}
