@@ -1,68 +1,79 @@
 //Renderer proc
 const ws = require('ws');
-const util = require('./../debug/util.js');
+import { stringify } from "../debug/util";
+import { clientList } from "./messageFactory";
 
-let server;
-let clients;
+class SignalServer{
+    constructor(port, logger) {
+        this.clients = {};
+        this.log = function(type, msg) { if(logger) logger.log(type, msg); };
 
-function start() {
-    clients = {};
+        this.server = ws.server(port);
+        this.server.on('connection', onConnection).bind(this);
 
-    server = ws.server('8080');
-    server.on('connection', onConnection);
-}
+        
+    }
 
-function onConnection(client) {
-    debug.log('INFO', 'Socket connection received:' + util.stringify(ws) + ".");
-
-    ws.on('message', (raw) => {
-        let msg = JSON.parse(raw);
-        debug.log('INFO', 'Message received:' + util.stringify(msg) + ".");
-        switch(msg.type) {
-            case 'info':
-                clients[msg.sender] = 
-                {
-                    connection: client,
-                    streaming: false
-                };
-                let list = [];
-                for(let key in clients) {
-                    list.push(key);
+    onConnection(client) {
+        client.on('message', function (raw){
+            let msg = JSON.parse(raw);
+            this.log('debug', 'Message received:' + stringify(msg) + ".");
+            switch(msg.type) {
+                case 'info':
+                    this.log('info', 'Client ' + msg.sender + ' connected.');
+                    this.clients[msg.sender] = 
+                    {
+                        connection: client,
+                        streaming: false
+                    };
+                    let list = [];
+                    for(let key in clients) {
+                        list.push(key);
+                    }
+                    let listMsg = clientList(list);
+                    this.broadcast(listMsg);
+                    break;
+                case 'Offer':
+                case 'Reply':
+                    if((msg.offer || msg.reply) && this.clients[msg.sender])
+                        this.clients[msg.sender].streaming = true;
+                case 'Ice':
+                case 'Close':
+                    if(!msg.offer && !msg.reply && !msg.ice && this.clients[msg.sender])
+                        this.clients[msg.sender].streaming = false;
+                default:
+                    if(this.clients[msg.target])
+                        this.send(this.clients[msg.target].connection, raw);
+                    break;
+            }
+        }.bind(this));
+    
+        client.on('close', function (reason) {
+            let id;
+            for(let key in this.clients)
+            {
+                if(this.clients[key] && this.clients[key].connection == client) {
+                    id = key;
+                    delete this.clients[key];
                 }
-                let listMsg = factory.clientList(list);
-                broadcast(listMsg);
-                break;
-            case 'offer':
-            case 'reply':
-                if((msg.offer || msg.reply) && clients[msg.sender])
-                    clients[msg.sender].streaming = true;
-            case 'ice':
-            default:
-                if(clients[msg.target])
-                    send(clients[msg.target].connection, raw);
-                break;
+            }
+            this.log('warn', 'Client ' + id + ' disconnected.');
+        }.bind(this));
+    }
+
+    broadcast(msg) {
+        for(let key in clients)
+        {
+            if(clients[key]) {
+                send(clients[key].connection, msg);
+            }
         }
-    });
+    }
 
-    ws.on('close', (reason) => {
-        debug.log('INFO', 'Client disconnected.');
 
-    });
-}
-
-function broadcast(msg) {
-    for(let key in clients)
-    {
-        if(client[key]) {
-            send(client[key].connection, msg);
-        }
+    send(client, msg) {
+        client.send(msg);
     }
 }
 
-function send(client, msg) {
-    client.send(msg);
-}
-
-function onMessage(msg) {
-
-}
+exports.SignalServer = SignalServer;

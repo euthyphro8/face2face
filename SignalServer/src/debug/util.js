@@ -4,4 +4,4 @@ function stringify(obj) {
 }
 
 
-exports.jify = jify;
+exports.stringify = stringify;

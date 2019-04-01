@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Face2Face</string>
 
-    <!-- StreamConnection Screen Strings -->
+    <!-- StreamClient Screen Strings -->
     <string name="server_address_text">Address Of Server</string>
     <string name="server_address_hint_text">35.192.33.173:4579</string>
     <string name="connect_button_text">Connect</string>

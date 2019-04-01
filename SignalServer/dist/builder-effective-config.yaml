@@ -1,0 +1,6 @@
+directories:
+  output: dist
+  buildResources: build
+appId: com.somethingspecific.rtcsignalserver
+copyright: 'Copyright © 2019 ${author}'
+electronVersion: 4.1.0

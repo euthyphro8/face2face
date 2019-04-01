@@ -44,6 +44,14 @@ function ice(id, target, candidate) {
     return msgToString(msg);
 }
 
+function close(id, target){
+    let msg = {};
+    msg.type = "Close";
+    msg.sender = id;
+    msg.target = target;
+    return msgToString(msg);
+}
+
 function msgToString(msg) {
     return JSON.stringify(msg);
 }
@@ -53,4 +61,5 @@ exports.clientList = clientList;
 exports.sdpOffer = sdpOffer;
 exports.sdpReply = sdpReply;
 exports.ice = ice;
-exports.toString = msgToString();
+exports.close = close;
+exports.toString = msgToString;

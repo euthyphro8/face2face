@@ -1,14 +1,19 @@
-let output = document.getElementById("console");
-let logId = 0;
 
 
-function log(level, msg) {
-     let div = document.createElement('div');
-     div.className = level.toString();
-     div.id = (logId++).toString();
-     div.innerHTML = '[' + level + '] ' + msg;
-    output.appendChild(div);
+
+class Logger {
+    constructor(element) {
+        this.console = element;
+        this.logId = 0;
+    }
+
+    log(level, msg) {
+        let div = document.createElement('div');
+        div.className = level.toString();
+        div.id = (this.logIdt++).toString();
+        div.innerHTML = '[' + level + '] ' + msg;
+        this.output.appendChild(div);
+   }
 }
 
-
-log('info', 'Logger initialized.')
+exports.Logger = Logger;

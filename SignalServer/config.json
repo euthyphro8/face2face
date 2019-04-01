@@ -1,5 +1,8 @@
 {
     "debug": {
         "enabled": true
+    },
+    "socket": {
+        "port": "3242"
     }
 }

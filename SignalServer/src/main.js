@@ -1,6 +1,5 @@
 
 const { app, BrowserWindow } = require('electron');
-const util = require('./util.js');
 var fs = require('fs');
 
 let window;
@@ -20,6 +19,13 @@ function onReady () {
     window.on('closed', () => {
         window = null;
     });
+
+    
+
+    window.webContents.devTools
+    window.webContents.openDevTools({mode: 'detach'});
+    window.moveTop();
+
 
     start();
 }

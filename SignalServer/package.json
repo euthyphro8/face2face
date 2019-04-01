@@ -1,15 +1,24 @@
 {
   "name": "signal-server",
   "version": "0.1.0",
+  "author": "Josh Hess",
+  "license": "ISC",
   "main": "src/main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
   },
   "devDependencies": {
-    "electron": "^4.1.0"
+    "electron": "^4.1.0",
+    "electron-builder": "^20.39.0"
   },
   "dependencies": {
     "fs": "0.0.1-security",
     "ws": "^6.2.0"
+  },
+  "build": {
+    "appId": "com.somethingspecific.rtcsignalserver",
+    "copyright": "Copyright © 2019 ${author}"
   }
 }

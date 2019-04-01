@@ -4,13 +4,13 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import org.webrtc.*
 import somethingspecific.face2face.R
-import somethingspecific.face2face.net.StreamConnection
+import somethingspecific.face2face.net.StreamClient
 
 
 class CallActivity : AppCompatActivity() {
 
 
-    private var client: StreamConnection? = null
+    private var client: StreamClient? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +23,6 @@ class CallActivity : AppCompatActivity() {
         val remoteVideoView = findViewById<SurfaceViewRenderer>(R.id.remoteView)
 //        remoteVideoView.setMirror(true)
 
-        client = StreamConnection(this, localVideoView, remoteVideoView)
+        client = StreamClient(this, localVideoView, remoteVideoView)
     }
 }
