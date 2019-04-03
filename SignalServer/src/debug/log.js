@@ -3,7 +3,7 @@
 
 class Logger {
     constructor(element) {
-        this.console = element;
+        this.output = element;
         this.logId = 0;
     }
 

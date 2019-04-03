@@ -3,6 +3,6 @@
         "enabled": true
     },
     "socket": {
-        "port": "3242"
+        "port": 8887
     }
 }

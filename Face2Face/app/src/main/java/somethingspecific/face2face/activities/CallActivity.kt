@@ -23,6 +23,6 @@ class CallActivity : AppCompatActivity() {
         val remoteVideoView = findViewById<SurfaceViewRenderer>(R.id.remoteView)
 //        remoteVideoView.setMirror(true)
 
-        client = StreamClient(this, localVideoView, remoteVideoView)
+//        client = StreamClient(this, localVideoView, remoteVideoView)
     }
 }

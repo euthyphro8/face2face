@@ -1,7 +1,6 @@
 
 function stringify(obj) {
-    return '<pre clss="json">' + JSON.stringify(obj) + '</pre>';
+    return '<pre class="json" script="var(--mainFont);">' + JSON.stringify(obj, null, 2) + '</pre>';
 }
-
 
 exports.stringify = stringify;

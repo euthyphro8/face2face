@@ -1,7 +1,15 @@
+root{
+    --mainFont: "Lucid Console", Lucida, monospace;
+}
+
 
 .output {
     margin: auto;
+    /* font-weight: bold; */
+    font-family: var(--mainFont);
+    /* font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; */
 }
+
 
 .trace {
     color: rgb(8, 132, 189);

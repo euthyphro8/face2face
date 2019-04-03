@@ -1,25 +1,52 @@
 package somethingspecific.face2face.net
 
 
-import io.javalin.Javalin;
+import android.util.Log
+import org.java_websocket.client.WebSocketClient
+import org.java_websocket.drafts.Draft_10
+import org.java_websocket.handshake.ServerHandshake
+import org.json.JSONException
+import org.json.JSONObject
+import java.net.URI
 
 
 class SignalClient(){
 
-//    private val connection:WebSocket
+    private val connection:WebSocketClient
 
     init {
-        val app = Javalin.create().staxrt(3000);
+        Log.d("SignalClient", "------------------------------------ Started ------------------------------------ ")
+        connection = object : WebSocketClient(URI("http://10.0.2.2:8887"), Draft_10()) {
+            override fun onMessage(message: String) {
+                Log.d("SignalClient", "<- Got Message!")
+                val obj = JSONObject(message)
+                val type = obj.getString("type")
 
-        app.ws("/websocket") { ws ->
-            ws.onConnect { session -> println("Connected") }
-            ws.onMessage { session, message ->
-                ("Received: " + message)
-                session.remote.sendString("Echo: " + message)
+                Log.d("SignalClient", message)
             }
-            ws.onClose { session, statusCode, reason -> println("Closed") }
-            ws.onError { session, throwable -> println("Errored") }
+
+            override fun onOpen(handshake: ServerHandshake) {
+                Log.d("SignalClient","Got connection!")
+
+                val obj = JSONObject()
+                obj.put("type", "ClientInfo")
+                obj.put("sender", "SENDER_08")
+                val message = obj.toString()
+                //send message
+                connection.send(message)
+            }
+
+            override fun onClose(code: Int, reason: String, remote: Boolean) {
+                Log.d("SignalClient","closeds connection")
+            }
+
+            override fun onError(ex: Exception) {
+                ex.printStackTrace()
+            }
+
         }
+
+        connection.connect()
 
     }
 

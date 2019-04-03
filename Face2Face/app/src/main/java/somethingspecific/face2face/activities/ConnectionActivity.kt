@@ -11,8 +11,11 @@ import android.util.Log
 import somethingspecific.face2face.R
 
 import kotlinx.android.synthetic.main.activity_connection.*
+import somethingspecific.face2face.net.SignalClient
 
 class ConnectionActivity : AppCompatActivity() {
+
+    var client:SignalClient? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +33,8 @@ class ConnectionActivity : AppCompatActivity() {
 
 
     private fun onReceivedServerEndpoint(endpoint: String) {
-        switchToNextView()
+//        switchToNextView()
+        client = SignalClient()
     }
 
     private fun switchToNextView() {

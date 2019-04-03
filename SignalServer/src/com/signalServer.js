@@ -1,25 +1,32 @@
 //Renderer proc
 const ws = require('ws');
-import { stringify } from "../debug/util";
-import { clientList } from "./messageFactory";
+const { stringify } = require("../debug/util");
+const { clientList } = require("./messageFactory");
 
 class SignalServer{
     constructor(port, logger) {
         this.clients = {};
+        this.port = port;
         this.log = function(type, msg) { if(logger) logger.log(type, msg); };
-
-        this.server = ws.server(port);
-        this.server.on('connection', onConnection).bind(this);
-
         
+        this.connect();
+    }
+
+    connect() {
+        this.server = new ws.Server({ port: this.port});
+        this.server.on('connection', this.onConnection.bind(this));
+
+        this.log('info', "Server started on " + this.port);
     }
 
     onConnection(client) {
+        this.log('info', 'Got connection.');
+
         client.on('message', function (raw){
             let msg = JSON.parse(raw);
-            this.log('debug', 'Message received:' + stringify(msg) + ".");
+            this.log('trace', 'Message received:' + stringify(msg) + ".");
             switch(msg.type) {
-                case 'info':
+                case 'Info':
                     this.log('info', 'Client ' + msg.sender + ' connected.');
                     this.clients[msg.sender] = 
                     {
