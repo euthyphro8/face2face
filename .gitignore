@@ -41,3 +41,4 @@ build
 *.swp
 
 SignalServer/node_modules/
+SignalServer/dist/
