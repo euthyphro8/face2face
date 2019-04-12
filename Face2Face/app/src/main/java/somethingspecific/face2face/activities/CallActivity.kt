@@ -4,7 +4,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import org.webrtc.*
 import somethingspecific.face2face.R
-import somethingspecific.face2face.net.StreamClient
+import somethingspecific.face2face.coms.StreamClient
 
 
 class CallActivity : AppCompatActivity() {
