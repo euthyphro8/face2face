@@ -6,6 +6,7 @@ import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_contact.*
 import somethingspecific.face2face.coms.ClientParameters
 import somethingspecific.face2face.R
+import somethingspecific.face2face.coms.Client
 import somethingspecific.face2face.models.ClientAdapter
 
 
@@ -25,8 +26,8 @@ class ContactActivity : AppCompatActivity() {
         if(!email.isNullOrEmpty())
             emailTxt.text = email
 
-//        Client.instance = Client("https://35.192.33.173:8887", username, email)
-//        Client.instance().ClientListEvent += { onContactList(it) }
+        Client.instance = Client("https://35.192.33.173:8887", username, email)
+        Client.instance().ClientListEvent += { onContactList(it) }
 
         var clients = arrayOf(
             ClientParameters(username, email,
