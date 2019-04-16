@@ -1,11 +1,12 @@
 //Renderer proc
 const ws = require('ws');
 const { stringify } = require("../debug/util");
-const { clientList } = require("./messageFactory");
+const factory = require("./messageFactory");
 
 class SignalServer{
     constructor(port, logger) {
-        this.clients = {};
+        this.connections = {};
+        this.clientsInfo = {};
         this.port = port;
         this.log = function(type, msg) { if(logger) logger.log(type, msg); };
         
@@ -24,55 +25,74 @@ class SignalServer{
 
         client.on('message', function (raw){
             let msg = JSON.parse(raw);
-            this.log('trace', 'Message received:' + stringify(msg) + ".");
+            this.log('trace', 'Message Inbound:' + stringify(msg));
             switch(msg.type) {
                 case 'Info':
                     this.log('info', 'Client ' + msg.sender + ' connected.');
-                    this.clients[msg.sender] = 
+                    this.connections[msg.sender] = 
                     {
-                        connection: client,
-                        streaming: false
+                        connection: client
                     };
-                    let list = [];
-                    for(let key in clients) {
-                        list.push(key);
-                    }
-                    let listMsg = clientList(list);
+                    this.clientsInfo[msg.sender] = 
+                    {
+                        email: msg.sender,
+                        user: msg.username,
+                        avatar: msg.avatar,
+                        status: "Online"
+                    };
+                    let listMsg = factory.list(this.clientsInfo);
                     this.broadcast(listMsg);
                     break;
+
                 case 'Offer':
                 case 'Reply':
-                    if((msg.offer || msg.reply) && this.clients[msg.sender])
-                        this.clients[msg.sender].streaming = true;
+                    if(this.clientsInfo[msg.sender])
+                        this.clientsInfo[msg.sender].status = "Chatting";
+                    if(this.connections[msg.target])
+                        this.send(this.connections[msg.target].connection, raw);
+                    break;
+
                 case 'Ice':
+                    if(this.connections[msg.target])
+                        this.send(this.connections[msg.target].connection, raw);
+                    break;
+
                 case 'Close':
-                    if(!msg.offer && !msg.reply && !msg.ice && this.clients[msg.sender])
-                        this.clients[msg.sender].streaming = false;
+                    if(this.clientsInfo[msg.sender])
+                        this.clientsInfo[msg.sender].status = "Online";
+                    if(this.connections[msg.target])
+                        this.send(this.connections[msg.target].connection, raw);
+                    break;
+
                 default:
-                    if(this.clients[msg.target])
-                        this.send(this.clients[msg.target].connection, raw);
+                    if(this.connections[msg.target])
+                        this.send(this.connections[msg.target].connection, raw);
                     break;
             }
         }.bind(this));
     
         client.on('close', function (reason) {
             let id;
-            for(let key in this.clients)
+            for(let key in this.connections)
             {
-                if(this.clients[key] && this.clients[key].connection == client) {
+                if(this.connections[key] && this.connections[key].connection == client) {
                     id = key;
-                    delete this.clients[key];
+                    break;
                 }
             }
+            
+            delete this.connections[id];
+            delete this.clientsInfo[id];
+
             this.log('warn', 'Client ' + id + ' disconnected.');
         }.bind(this));
     }
 
     broadcast(msg) {
-        for(let key in clients)
+        for(let key in this.connections)
         {
-            if(clients[key]) {
-                send(clients[key].connection, msg);
+            if(this.connections[key]) {
+                this.send(this.connections[key].connection, msg);
             }
         }
     }
@@ -80,6 +100,7 @@ class SignalServer{
 
     send(client, msg) {
         client.send(msg);
+        this.log('trace', 'Message Outbound:' + stringify(JSON.parse(msg)));
     }
 }
 

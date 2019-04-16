@@ -26,7 +26,8 @@ class ContactActivity : AppCompatActivity() {
         if(!email.isNullOrEmpty())
             emailTxt.text = email
 
-        Client.instance = Client("https://35.192.33.173:8887", username, email)
+//        Client.instance = Client("https://35.192.33.173:8887", username, email)
+        Client.instance = Client("https://192.168.1.17:8887", username, email)
         Client.instance().ClientListEvent += { onContactList(it) }
 
         var clients = arrayOf(
@@ -53,12 +54,10 @@ class ContactActivity : AppCompatActivity() {
 //        switchToNextView()
     }
 
-    private fun onContactList(clients: ArrayList<ClientParameters> ) {
-//        val arrayAdapter = ArrayAdapter<String>(
-//            this,
-//            android.R.layout.simple_list_item_1,
-//            clients
-//        )
+    private fun onContactList(clients: Array<ClientParameters> ) {
+//        RunOnUiThread
+        var adapter = ClientAdapter(this, R.layout.client_listview_item_row, clients)
+        clientLst.adapter = adapter
     }
 
     private fun switchToNextView() {

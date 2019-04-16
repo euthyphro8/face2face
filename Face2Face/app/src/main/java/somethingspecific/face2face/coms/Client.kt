@@ -1,7 +1,6 @@
 package somethingspecific.face2face.coms
 
 import android.util.Log
-import org.json.JSONArray
 import org.json.JSONObject
 import org.webrtc.IceCandidate
 import org.webrtc.SessionDescription
@@ -9,10 +8,12 @@ import org.webrtc.StatsReport
 import somethingspecific.face2face.events.Event
 import somethingspecific.face2face.events.EventManager
 
+
+
 public class Client(address:String, username:String, email:String) {
 
 
-    public val ClientListEvent = Event<ArrayList<ClientParameters>>()
+    public val ClientListEvent = Event<Array<ClientParameters>>()
 
 
     companion object {
@@ -50,6 +51,8 @@ public class Client(address:String, username:String, email:String) {
         events.MessageEvent += { msg -> onMessage(msg) }
         events.ClosedEvent += { onClose() }
 
+        signal.connect()
+
     }
 
     private fun onOpen() {
@@ -62,7 +65,7 @@ public class Client(address:String, username:String, email:String) {
         val msg = JSONObject(raw)
         val type = msg.getString("type")
         when (type) {
-            "List" -> onList(msg.getJSONArray("list"))
+            "List" -> onList(msg.getJSONObject("clients"))
             "Offer" -> onOffer(msg.getString("target"),
                 msg.getJSONObject("offer"))
             "Reply" -> onReply(msg.getString("target"),
@@ -72,17 +75,18 @@ public class Client(address:String, username:String, email:String) {
         }
     }
 
-    private fun onList(list:JSONArray) {
+    private fun onList(list:JSONObject) {
         peers.clear()
-        for (i in 0 until list.length()) {
-            val param = list.getJSONObject(i)
-            val email = param.getString("id")
-            val user = param.getString("user")
-            val avatar = param.getString("avatar")
-            val status = param.getString("status")
-            peers.add(ClientParameters(user, email, avatar, status))
+        list.keys().forEach {
+            val client = list.getJSONObject(it)
+            val email = client.getString("email")
+            val user = client.getString("user")
+            val avatar = client.getString("avatar")
+            val status = client.getString("status")
+//            if(email != params.email)
+                peers.add(ClientParameters(user, email, avatar, status))
         }
-        ClientListEvent(peers)
+        ClientListEvent(peers.toTypedArray())
     }
 
     private fun onOffer(target:String, offer:JSONObject) {

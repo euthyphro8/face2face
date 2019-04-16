@@ -13,6 +13,8 @@ public class MessageFactory {
             val msg = JSONObject()
             msg.put("type", "Info")
             msg.put("sender", id)
+            msg.put("username", user)
+            msg.put("avatar", avatar)
             return msg.toString()
         }
 

@@ -1,20 +1,20 @@
 
 
-function clientInfo(id) {
+function info(id) {
     let msg = {};
     msg.type = "Info";
     msg.sender = id;
     return msgToString(msg);
 }
 
-function clientList(clients) {
+function list(clients) {
     let msg = {};
     msg.type = "List";
     msg.clients = clients;
     return msgToString(msg);
 }
 
-function sdpOffer(id, target, description) {
+function offer(id, target, description) {
     let msg = {};
     msg.type = "Offer";
     msg.sender = id;
@@ -26,7 +26,7 @@ function sdpOffer(id, target, description) {
 /**
  * Distinction between offer and reply is important for servers state tracking.
  */
-function sdpReply(id, target, description) {
+function reply(id, target, description) {
     let msg = {};
     msg.type = "Reply";
     msg.sender = id;
@@ -56,10 +56,10 @@ function msgToString(msg) {
     return JSON.stringify(msg);
 }
 
-exports.clientInfo = clientInfo;
-exports.clientList = clientList;
-exports.sdpOffer = sdpOffer;
-exports.sdpReply = sdpReply;
+exports.info = info;
+exports.list = list;
+exports.offer = offer;
+exports.reply = reply;
 exports.ice = ice;
 exports.close = close;
 exports.toString = msgToString;
