@@ -7,22 +7,112 @@
         android:layout_height="match_parent"
         tools:context=".activities.ContactActivity">
 
-    <android.support.v7.widget.RecyclerView
+    <TextView
+            android:text="Profile"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/profileTxt"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp"
+            android:fontFamily="sans-serif-black" android:textSize="24sp"
+            app:layout_constraintHorizontal_bias="0.0"
             android:layout_marginTop="8dp"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/constraintLayout"/>
+    <ListView
+            android:layout_width="0dp"
+            android:layout_height="0dp" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/textView5" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-            android:id="@+id/client_list" android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/call_btn">
-    </android.support.v7.widget.RecyclerView>
+            android:layout_marginBottom="16dp" app:layout_constraintBottom_toTopOf="@+id/call_btn"
+            android:id="@+id/clientLst"/>
     <Button
             android:text="@string/call_button_text"
             android:layout_width="0dp"
-            android:layout_height="wrap_content" android:id="@+id/call_btn" android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/client_list" app:layout_constraintStart_toStartOf="parent"
+            android:layout_height="wrap_content" android:id="@+id/call_btn"
+            app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"
             android:background="@color/colorAccent" android:textColor="@android:color/background_light"
     />
+    <android.support.constraint.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="140dp"
+            android:id="@+id/constraintLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp"
+            app:layout_constraintHorizontal_bias="0.0" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/profileTxt"
+            app:layout_constraintBottom_toTopOf="@+id/textView5">
+        <android.support.constraint.ConstraintLayout
+                android:layout_height="0dp" android:layout_marginTop="8dp"
+                app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="8dp" android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:id="@+id/constraintLayout3" android:layout_width="128dp">
+
+            <TextView
+                    android:text="Online"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/statusTxt" app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="8dp" android:layout_marginBottom="2dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/avatarIco"/>
+            <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp" tools:srcCompat="@drawable/me"
+                    android:id="@+id/avatarIco" android:layout_marginTop="2dp"
+                    app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="2dp" app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="2dp" android:layout_marginBottom="2dp"
+                    app:layout_constraintBottom_toTopOf="@+id/statusTxt"/>
+        </android.support.constraint.ConstraintLayout>
+        <android.support.constraint.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/constraintLayout2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="8dp" android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="8dp" app:layout_constraintStart_toEndOf="@+id/constraintLayout3"
+                android:layout_marginStart="8dp">
+
+            <TextView
+                    android:text="Username"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/userTxt"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="8dp"
+                    android:textSize="30sp" android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"/>
+            <TextView
+                    android:text="example@gmail.com"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/emailTxt" app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="8dp"
+                    android:textStyle="italic"
+                    android:fontFamily="sans-serif-light" android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toBottomOf="@+id/userTxt" android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+        </android.support.constraint.ConstraintLayout>
+    </android.support.constraint.ConstraintLayout>
+    <TextView
+            android:text="Contacts"
+            android:layout_width="395dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView5"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp"
+            android:fontFamily="sans-serif-black" android:textSize="24sp"
+            app:layout_constraintHorizontal_bias="0.0" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+            app:layout_constraintBottom_toTopOf="@+id/clientLst"/>
 </android.support.constraint.ConstraintLayout>

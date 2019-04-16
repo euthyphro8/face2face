@@ -21,17 +21,10 @@ import java.util.*
 import java.util.concurrent.Executors
 import org.webrtc.PeerConnectionFactory
 import android.os.AsyncTask.execute
-import somethingspecific.face2face.apprtc.PeerConnectionClient.PeerConnectionParameters
 import org.webrtc.audio.JavaAudioDeviceModule
 import org.webrtc.audio.JavaAudioDeviceModule.AudioTrackErrorCallback
 import org.webrtc.audio.JavaAudioDeviceModule.AudioRecordErrorCallback
 import org.webrtc.audio.AudioDeviceModule
-
-
-
-
-
-
 
 
 class StreamClient(appContext: Context, rootEglBase: EglBase,
@@ -137,22 +130,22 @@ class StreamClient(appContext: Context, rootEglBase: EglBase,
             .createPeerConnectionFactory()
 
 
-        val iceServers = listOf(
-            PeerConnection.IceServer
-                .builder(
-                    listOf(
-                        "turn:173.194.72.127:19305?transport=udp",
-                        "turn:[2404:6800:4008:C01::7F]:19305?transport=udp",
-                        "turn:173.194.72.127:443?transport=tcp",
-                        "turn:[2404:6800:4008:C01::7F]:443?transport=tcp"))
-                .setUsername("CKjCuLwFEgahxNRjuTAYzc/s6OMT")
-                .setPassword("u1SQDR/SQsPQIxXNWQT7czc/G4c=")
-                .createIceServer(),
-            PeerConnection.IceServer
-                .builder(
-                    listOf(
-                        "stun:stun.l.google.com:19302"))
-                .createIceServer()
+        val iceServers = listOf<PeerConnection.IceServer>(
+//            PeerConnection.IceServer
+//                .builder(
+//                    listOf(
+//                        "turn:173.194.72.127:19305?transport=udp",
+//                        "turn:[2404:6800:4008:C01::7F]:19305?transport=udp",
+//                        "turn:173.194.72.127:443?transport=tcp",
+//                        "turn:[2404:6800:4008:C01::7F]:443?transport=tcp"))
+//                .setUsername("CKjCuLwFEgahxNRjuTAYzc/s6OMT")
+//                .setPassword("u1SQDR/SQsPQIxXNWQT7czc/G4c=")
+//                .createIceServer(),
+//            PeerConnection.IceServer
+//                .builder(
+//                    listOf(
+//                        "stun:stun.l.google.com:19302"))
+//                .createIceServer()
             )
 
         val rtcConfig = PeerConnection.RTCConfiguration(iceServers)
@@ -423,7 +416,6 @@ class StreamClient(appContext: Context, rootEglBase: EglBase,
   }
 
     //#endregion
-
 
 }
 

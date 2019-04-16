@@ -3,15 +3,17 @@ package somethingspecific.face2face.activities
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import kotlinx.android.synthetic.main.activity_connection.*
 import kotlinx.android.synthetic.main.activity_login.*
-import somethingspecific.face2face.R
+
 
 class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        setContentView(somethingspecific.face2face.R.layout.activity_login)
+
+
+
         login_btn.setOnClickListener {
             var username = user_text.text?.toString() ?: ""
             var email = email_text.text?.toString() ?: ""
@@ -20,11 +22,12 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun onLogin(username: String, email: String) {
-        switchToNextView()
+        switchToNextView(username, email)
     }
 
-    private fun switchToNextView() {
+    private fun switchToNextView(username:String, email:String) {
         var contactIntent = Intent(this, ContactActivity::class.java)
+        contactIntent.putExtra("username", username).putExtra("email", email)
         startActivity(contactIntent)
     }
 }

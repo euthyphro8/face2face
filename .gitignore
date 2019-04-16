@@ -44,3 +44,7 @@ build
 *~
 *.swp
 Face2Face/app/src/main/java/somethingspecific/face2face/apprtc/
+
+SignalServer/signal-server-win32-x64/
+
+*.tgz

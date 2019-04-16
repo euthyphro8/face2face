@@ -21,27 +21,33 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+
+        <!--android:name=".activities.ConnectionActivity"-->
         <activity
-                android:name=".activities.ConnectionActivity"
+                android:name=".activities.LoginActivity"
                 android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity
-                android:name=".activities.LoginActivity"
-                android:label="@string/title_activity_login"
-                android:theme="@style/AppTheme.NoActionBar"/>
+
+        <!--<activity-->
+                <!--android:name=".activities.LoginActivity"-->
+                <!--android:label="@string/title_activity_login"-->
+                <!--android:theme="@style/AppTheme.NoActionBar">-->
+        <!--</activity>-->
+
         <activity android:name=".activities.ContactActivity">
         </activity>
+
         <activity
                 android:name=".activities.CallActivity"
                 android:configChanges="orientation|keyboardHidden|screenSize"
                 android:label="@string/title_activity_call"
                 android:theme="@style/FullscreenTheme">
         </activity>
+
     </application>
 
 </manifest>

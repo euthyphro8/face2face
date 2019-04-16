@@ -31,7 +31,6 @@ class ConnectionActivity : AppCompatActivity() {
 
     private fun onReceivedServerEndpoint(endpoint: String) {
 //        switchToNextView()
-        client = SignalClient()
     }
 
     private fun switchToNextView() {

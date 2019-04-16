@@ -2,21 +2,21 @@
 
 function clientInfo(id) {
     let msg = {};
-    msg.type = "ClientInfo";
+    msg.type = "Info";
     msg.sender = id;
     return msgToString(msg);
 }
 
 function clientList(clients) {
     let msg = {};
-    msg.type = "ClientList";
+    msg.type = "List";
     msg.clients = clients;
     return msgToString(msg);
 }
 
 function sdpOffer(id, target, description) {
     let msg = {};
-    msg.type = "SdpOffer";
+    msg.type = "Offer";
     msg.sender = id;
     msg.target = target;
     msg.offer = description;
@@ -28,7 +28,7 @@ function sdpOffer(id, target, description) {
  */
 function sdpReply(id, target, description) {
     let msg = {};
-    msg.type = "SdpReply";
+    msg.type = "Reply";
     msg.sender = id;
     msg.target = target;
     msg.reply = description;
