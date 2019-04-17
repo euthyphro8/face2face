@@ -27,7 +27,7 @@ class ContactActivity : AppCompatActivity() {
             emailTxt.text = email
 
 //        Client.instance = Client("https://35.192.33.173:8887", username, email)
-        Client.instance = Client("https://192.168.1.17:8887", username, email)
+        Client.instance = Client("ws://192.168.1.17:8887", username, email)
         Client.instance().ClientListEvent += { onContactList(it) }
 
         var clients = arrayOf(
