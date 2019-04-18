@@ -1,8 +1,10 @@
 package somethingspecific.face2face.activities
 
+import android.Manifest
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.app.ActivityCompat
 import kotlinx.android.synthetic.main.activity_login.*
 
 
@@ -12,6 +14,11 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(somethingspecific.face2face.R.layout.activity_login)
 
+
+
+        ActivityCompat.requestPermissions(this,
+            arrayOf(Manifest.permission.CAMERA),
+            101)
 
 
         login_btn.setOnClickListener {

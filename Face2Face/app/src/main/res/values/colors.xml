@@ -1,8 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#d81b60</color>
+    <!--<color name="colorPrimary">#008577</color>-->
+    <!--<color name="colorPrimaryDark">#00574B</color>-->
+    <!--<color name="colorAccent">#d81b60</color>-->
+
+    <!--<color name="black_overlay">#66000000</color>-->
+
+    <color name="colorPrimary">#163F19</color>
+    <color name="colorPrimaryDark">#2C5E2F</color>
+    <color name="colorAccent">#3A2951</color>
 
     <color name="black_overlay">#66000000</color>
+
+    <color name="background">#282828</color>
+    <color name="foreground">#81768F</color>
+    <color name="foregroundAccent">#86A689</color>
+
+
+    <color name="p1">#282828</color>
+    <color name="p2">#163F19</color>
+    <color name="p3">#2C5E2F</color>
+    <color name="p4">#558F59</color>
+    <color name="p5">#86A689</color>
+
+    <color name="s1">#232323</color>
+    <color name="s2">#241636</color>
+    <color name="s3">#3A2951</color>
+    <color name="s4">#614E7C</color>
+    <color name="s5">#81768F</color>
+
+    <color name="a1">#333333</color>
+    <color name="a2">#504B1C</color>
+    <color name="a3">#777137</color>
+    <color name="a4">#B6AF6C</color>
+    <color name="a5">#D3D0AB</color>
+
+    <color name="t1">#333333</color>
+    <color name="t2">#501E1C</color>
+    <color name="t3">#773937</color>
+    <color name="t4">#B66E6C</color>
+    <color name="t5">#D3ACAB</color>
+
 </resources>

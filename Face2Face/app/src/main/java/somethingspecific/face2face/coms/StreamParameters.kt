@@ -2,25 +2,27 @@ package somethingspecific.face2face.coms
 
 
 class StreamParameters(
-    val videoCallEnabled: Boolean,
-    val loopback: Boolean,
-    val tracing: Boolean,
-    val videoWidth: Int,
-    val videoHeight: Int,
-    val videoFps: Int,
-    val videoMaxBitrate: Int,
-    val videoCodec: String,
-    val videoCodecHwAcceleration: Boolean,
-    val videoFlexfecEnabled: Boolean,
-    val audioStartBitrate: Int,
-    val audioCodec: String,
-    val noAudioProcessing: Boolean,
-    val aecDump: Boolean,
-    val saveInputAudioToFile: Boolean,
-    val useOpenSLES: Boolean,
-    val disableBuiltInAEC: Boolean,
-    val disableBuiltInAGC: Boolean,
-    val disableBuiltInNS: Boolean,
-    val disableWebRtcAGCAndHPF: Boolean,
-    val enableRtcEventLog: Boolean
+    var videoCallEnabled: Boolean,
+    var loopback: Boolean,
+    var tracing: Boolean,
+    var videoWidth: Int,
+    var videoHeight: Int,
+    var videoFps: Int,
+    var videoMaxBitrate: Int,
+    var videoCodec: String,
+    var videoCodecHwAcceleration: Boolean,
+    var videoFlexfecEnabled: Boolean,
+    var audioStartBitrate: Int,
+    var audioCodec: String,
+    var noAudioProcessing: Boolean,
+    var aecDump: Boolean,
+    var saveInputAudioToFile: Boolean,
+    var useOpenSLES: Boolean,
+    var disableBuiltInAEC: Boolean,
+    var disableBuiltInAGC: Boolean,
+    var disableBuiltInNS: Boolean,
+    var disableWebRtcAGCAndHPF: Boolean,
+    var enableRtcEventLog: Boolean
 )
+
+

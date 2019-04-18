@@ -1,10 +1,9 @@
 package somethingspecific.face2face.coms
 
+import android.content.Context
 import android.util.Log
 import org.json.JSONObject
-import org.webrtc.IceCandidate
-import org.webrtc.SessionDescription
-import org.webrtc.StatsReport
+import org.webrtc.*
 import somethingspecific.face2face.events.Event
 import somethingspecific.face2face.events.EventManager
 
@@ -30,12 +29,14 @@ public class Client(address:String, username:String, email:String) {
 
     private var events: EventManager
     private var signal: SignalClient
-    private var stream: StreamClient?
+    private var stream: StrippedStreamClient?
     private var params: ClientParameters
+    private var target: ClientParameters?
 
     private var peers: ArrayList<ClientParameters>
 
     init{
+        target = null
         peers = ArrayList()
         params = ClientParameters(username, email,
             "https://scontent-lax3-1.xx.fbcdn.net/v/t1.0-9/5616975" +
@@ -54,6 +55,40 @@ public class Client(address:String, username:String, email:String) {
         signal.connect()
 
     }
+
+
+    public fun hasTarget():Boolean {
+        if(target == null)
+            return false
+        return true
+    }
+
+    public fun setTarget(client: ClientParameters):Boolean {
+        if(client.email == params.email)
+            return false
+        target = client
+        return true
+    }
+
+    public fun call(context: Context, root: EglBase, capturer: VideoCapturer?, local: SurfaceViewRenderer, remote: SurfaceViewRenderer) {
+        if(target != null) {
+            stream = StrippedStreamClient(context, root, getStreamParameters(), events, capturer, local, remote)
+            var offer = stream!!.createOffer()
+            var msg = MessageFactory.Offer(params.email, target!!.email, offer)
+            signal.send(msg)
+        }
+    }
+
+
+    private fun getStreamParameters(): StreamParameters{
+        return StreamParameters(true, false, false,
+            1280, 720, 30, 0, "H264 High",
+            true, true, 0, "opus",
+            true, false, false, true,
+            false, false, false,
+            false, false)
+    }
+
 
     private fun onOpen() {
         Log.d(TAG, "Client connected!")
@@ -90,7 +125,7 @@ public class Client(address:String, username:String, email:String) {
     }
 
     private fun onOffer(target:String, offer:JSONObject) {
-
+        Log.d(TAG, "Got offer")
     }
 
     private fun onReply(target:String, reply:JSONObject) {

@@ -13,7 +13,7 @@ import somethingspecific.face2face.coms.ClientParameters
 class ClientAdapter(internal var context: Context, internal var layoutResourceId: Int, data: Array<ClientParameters>) :
     ArrayAdapter<ClientParameters>(context, layoutResourceId, data) {
 
-    internal var data: Array<ClientParameters>? = null
+    public var data: Array<ClientParameters>? = null
 
     init {
         this.data = data
@@ -43,16 +43,18 @@ class ClientAdapter(internal var context: Context, internal var layoutResourceId
         holder.userTxt!!.text = client.username
         holder.emailTxt!!.text = client.email
         holder.statusTxt!!.text = client.status
+
 //TODO: https://github.com/jkwiecien/EasyImage
         holder.avatarIco!!.setImageResource(R.drawable.me)
 
         return row
     }
 
-    internal class ClientHolder {
+    public class ClientHolder {
         var avatarIco: ImageView? = null
         var userTxt: TextView? = null
         var emailTxt: TextView? = null
         var statusTxt: TextView? = null
+
     }
 }
