@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="somethingspecific.face2face">
+          xmlns:tools="http://schemas.android.com/tools" package="somethingspecific.face2face">
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
@@ -16,36 +16,33 @@
 
     <application
             android:allowBackup="true"
-            android:icon="@mipmap/ic_launcher"
-            android:label="@string/app_name"
-            android:roundIcon="@mipmap/ic_launcher_round"
+            android:icon="@mipmap/f2f_launcher"
+            android:label="Face2Face"
+            android:roundIcon="@mipmap/f2f_launcher_round"
             android:supportsRtl="true"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme" tools:ignore="GoogleAppIndexingWarning">
 
-        <!--android:name=".activities.ConnectionActivity"-->
         <activity
-                android:name=".activities.LoginActivity"
-                android:label="@string/app_name">
+            android:name=".activities.LoginActivity"
+            android:label="Face2Face"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
 
-        <!--<activity-->
-                <!--android:name=".activities.LoginActivity"-->
-                <!--android:label="@string/title_activity_login"-->
-                <!--android:theme="@style/AppTheme.NoActionBar">-->
-        <!--</activity>-->
-
-        <activity android:name=".activities.ContactActivity">
+        <activity
+            android:name=".activities.ContactActivity"
+            android:label="Contacts"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
         <activity
-                android:name=".activities.CallActivity"
-                android:configChanges="orientation|keyboardHidden|screenSize"
-                android:label="@string/title_activity_call"
-                android:theme="@style/FullscreenTheme">
+            android:name=".activities.CallActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="Call">
+            <!--android:theme="@style/FullscreenTheme">-->
         </activity>
 
     </application>

@@ -5,7 +5,9 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
+import android.view.animation.AnimationUtils
 import kotlinx.android.synthetic.main.activity_login.*
+import somethingspecific.face2face.R
 
 
 class LoginActivity : AppCompatActivity() {
@@ -15,17 +17,17 @@ class LoginActivity : AppCompatActivity() {
         setContentView(somethingspecific.face2face.R.layout.activity_login)
 
 
-
-        ActivityCompat.requestPermissions(this,
-            arrayOf(Manifest.permission.CAMERA),
-            101)
-
-
         login_btn.setOnClickListener {
             var username = user_text.text?.toString() ?: ""
             var email = email_text.text?.toString() ?: ""
             onLogin(username, email)
         }
+
+        startAnim()
+    }
+
+    private fun startAnim() {
+        rtcFlowerImg.startAnimation(AnimationUtils.loadAnimation(this, R.anim.rotate_indefinitely))
     }
 
     private fun onLogin(username: String, email: String) {

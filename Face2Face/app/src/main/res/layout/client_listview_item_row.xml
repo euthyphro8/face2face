@@ -27,7 +27,7 @@
                 android:textSize="8sp" android:textColor="@color/foreground"/>
         <ImageView
                 android:layout_width="0dp"
-                android:layout_height="0dp" tools:srcCompat="@drawable/me"
+                android:layout_height="0dp" tools:srcCompat="@drawable/no_avatar"
                 android:id="@+id/avatarIco" android:layout_marginTop="2dp"
                 app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="2dp" app:layout_constraintEnd_toEndOf="parent"

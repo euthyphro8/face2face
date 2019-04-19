@@ -45,7 +45,7 @@ class ClientAdapter(internal var context: Context, internal var layoutResourceId
         holder.statusTxt!!.text = client.status
 
 //TODO: https://github.com/jkwiecien/EasyImage
-        holder.avatarIco!!.setImageResource(R.drawable.me)
+        holder.avatarIco!!.setImageResource(R.drawable.no_avatar)
 
         return row
     }

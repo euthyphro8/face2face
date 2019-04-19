@@ -45,7 +45,7 @@ public class MessageFactory {
             msg.put("type", "Offer")
             msg.put("sender", id)
             msg.put("target", target)
-            msg.put("offer", offer)
+            msg.put("offer", offer.description)
             return msg.toString()
         }
 
@@ -54,7 +54,7 @@ public class MessageFactory {
             msg.put("type", "Reply")
             msg.put("sender", id)
             msg.put("target", target)
-            msg.put("reply", reply)
+            msg.put("reply", reply.description)
             return msg.toString()
         }
 
@@ -63,7 +63,9 @@ public class MessageFactory {
             msg.put("type", "Ice")
             msg.put("sender", id)
             msg.put("target", target)
-            msg.put("ice", ice)
+            msg.put("ice", ice.sdp)
+            msg.put("iceIndex", ice.sdpMLineIndex)
+            msg.put("iceMid", ice.sdpMid)
             return msg.toString()
         }
 

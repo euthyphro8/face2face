@@ -1,6 +1,7 @@
 package somethingspecific.face2face.events
 
 import org.webrtc.IceCandidate
+import org.webrtc.MediaStream
 import org.webrtc.SessionDescription
 import org.webrtc.StatsReport
 
@@ -68,7 +69,18 @@ public class EventManager {
     /**
      * Callback fired once local SDP is created and set.
      */
-    public val LocalDescriptionEvent = Event<SessionDescription>()
+    public val OfferEvent = Event<SessionDescription>()
+
+
+    /**
+     * Callback fired once remote SDP is created and set.
+     */
+    public val ReplyEvent = Event<SessionDescription>()
+
+    /**
+     * Callback fired once the media streams have returned from the rtc peer.
+     */
+    public val AddMediaEvent = Event<Array<MediaStream>>()
 
     /**
      * Callback fired once peer connection statistics is ready.
