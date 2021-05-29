@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "fs": "0.0.1-security",
-    "ws": "^6.2.0"
+    "ws": "^7.4.6"
   },
   "build": {
     "appId": "com.somethingspecific.rtcsignalserver",
